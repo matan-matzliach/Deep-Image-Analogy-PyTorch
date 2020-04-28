@@ -51,12 +51,12 @@ if __name__=="__main__":
     print("##### Deep Image Analogy - end | Elapse:"+elapse+" #####")
 
     # save result
-    content = os.listdir('results')
+    content = os.listdir('Deep-Image-Analogy-PyTorch-master/results')
     count = 1
     for c in content:
-        if os.path.isdir('results/'+c):
+        if os.path.isdir('Deep-Image-Analogy-PyTorch-master/results/'+c):
             count += 1
-    save_path = 'results/expr_{}'.format(count)
+    save_path = 'Deep-Image-Analogy-PyTorch-master/results/expr_{}'.format(count)
     os.mkdir(save_path)
 
     cv2.imwrite(save_path+'/img_AP.png', img_AP)
