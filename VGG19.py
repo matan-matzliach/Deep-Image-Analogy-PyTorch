@@ -134,7 +134,7 @@ class VGG19:
 
         # ================
         init_loss = go(noise).item()
-        noise = noise.view(-1)
+        noise = noise.contiguous().view(-1)
         for idx in range(1000):
             noise, stat = lbfgs(f, noise, maxIter=iters, gEps=1e-4, histSize=4, lr=lr, display=display)
             if stat in ["LBFGS REACH MAX ITER", "LBFGS BELOW GRADIENT EPS"]:
