@@ -15,6 +15,7 @@ if __name__=="__main__":
     parser.add_argument('--img_A_path', type=str, default='data/demo/ava.png')
     parser.add_argument('--img_BP_path', type=str, default='data/demo/mona.png')
     parser.add_argument('--use_cuda', type=str2bool, default=True)
+    parser.add_argument('--img_AP_path', type=str) #not just a path, also file name (.png /.jpg)
 
     args = parser.parse_args()
 
@@ -61,6 +62,13 @@ if __name__=="__main__":
 
     cv2.imwrite(save_path+'/img_AP.png', img_AP)
     cv2.imwrite(save_path+'/img_B.png', img_B)
+    
+    
+    
+    cv2.imwrite(args.img_A_2path, img_AP)
+    
+    
+    
     print('Image saved!')
 
 
