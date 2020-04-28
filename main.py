@@ -64,7 +64,7 @@ if __name__=="__main__":
     cv2.imwrite(save_path+'/img_B.png', img_B)
     
     
-    if !(args.img_AP_path is None):
+    if not(args.img_AP_path is None):
         cv2.imwrite(args.img_AP_path, img_AP)
     
     
