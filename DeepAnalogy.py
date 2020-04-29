@@ -121,13 +121,14 @@ def analogy(img_A, img_BP, config):
 
     print('\n- reconstruct images A\' and B')
     img_AP = reconstruct_avg(ann_AB, img_BP, sizes[curr_layer], data_A_size[curr_layer][2:], data_B_size[curr_layer][2:])
-    img_B = reconstruct_avg(ann_BA, img_A, sizes[curr_layer], data_A_size[curr_layer][2:], data_B_size[curr_layer][2:])
+    #img_B = reconstruct_avg(ann_BA, img_A, sizes[curr_layer], data_A_size[curr_layer][2:], data_B_size[curr_layer][2:])
     
     img_AP = np.clip(img_AP, 0, 255)
-    img_B = np.clip(img_B, 0, 255)    
+    #img_B = np.clip(img_B, 0, 255)    
 
 
-    return img_AP, img_B, str(datetime.timedelta(seconds=time.time()- start_time_0))[:-7]
+    #return img_AP, img_B, str(datetime.timedelta(seconds=time.time()- start_time_0))[:-7]
+    return img_AP, str(datetime.timedelta(seconds=time.time()- start_time_0))[:-7]
 
 
 

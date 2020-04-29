@@ -48,7 +48,7 @@ if __name__=="__main__":
 
     # Deep-Image-Analogy
     print("\n##### Deep Image Analogy - start #####")
-    img_AP, img_B, elapse = analogy(img_A, img_BP, config)
+    img_AP, elapse = analogy(img_A, img_BP, config)
     print("##### Deep Image Analogy - end | Elapse:"+elapse+" #####")
 
     # save result
@@ -61,7 +61,7 @@ if __name__=="__main__":
     os.mkdir(save_path)
 
     cv2.imwrite(save_path+'/img_AP.png', img_AP)
-    cv2.imwrite(save_path+'/img_B.png', img_B)
+    #cv2.imwrite(save_path+'/img_B.png', img_B)
     
     
     if not(args.img_AP_path is None):
