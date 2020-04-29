@@ -65,11 +65,13 @@ def analogy(img_A, img_BP, config):
                               params['iter'], rangee[curr_layer])
         print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])
 
-        print("- NNF search for ann_BA")
-        start_time_2 = time.time()
-        ann_BA, _ = propagate(ann_BA, ts2np(Ndata_BP), ts2np(Ndata_B), ts2np(Ndata_AP), ts2np(Ndata_A), sizes[curr_layer],
-                              params['iter'], rangee[curr_layer])
-        print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])        
+        #No need to calc last phi at this direction:
+        if curr_layer<4:
+            print("- NNF search for ann_BA")
+            start_time_2 = time.time()
+            ann_BA, _ = propagate(ann_BA, ts2np(Ndata_BP), ts2np(Ndata_B), ts2np(Ndata_AP), ts2np(Ndata_A), sizes[curr_layer],
+                                  params['iter'], rangee[curr_layer])
+            print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])        
 
         if curr_layer >= 4:
             print("### current stage: %d - end | "%(5-curr_layer)+"Elapse: "+str(datetime.timedelta(seconds=time.time()- start_time_1))[:-7]+' ###')
