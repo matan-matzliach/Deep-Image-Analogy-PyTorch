@@ -66,13 +66,13 @@ def analogy(img_A, img_BP, config):
         print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])
 
         #No need to calc last phi at this direction:
-        if curr_layer<4:
+        '''if curr_layer<4:
             print("- NNF search for ann_BA")
             start_time_2 = time.time()
             ann_BA, _ = propagate(ann_BA, ts2np(Ndata_BP), ts2np(Ndata_B), ts2np(Ndata_AP), ts2np(Ndata_A), sizes[curr_layer],
                                   params['iter'], rangee[curr_layer])
             print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])        
-
+        '''
         if curr_layer >= 4:
             print("### current stage: %d - end | "%(5-curr_layer)+"Elapse: "+str(datetime.timedelta(seconds=time.time()- start_time_1))[:-7]+' ###')
             break
@@ -81,23 +81,23 @@ def analogy(img_A, img_BP, config):
         next_layer = curr_layer + 2
 
         ann_AB_upnnf2 = upSample_nnf(ann_AB, data_A_size[next_layer][2:])
-        ann_BA_upnnf2 = upSample_nnf(ann_BA, data_B_size[next_layer][2:])
+        '''ann_BA_upnnf2 = upSample_nnf(ann_BA, data_B_size[next_layer][2:])'''
 
         data_AP_np = avg_vote(ann_AB_upnnf2, ts2np(data_BP[next_layer]), sizes[next_layer], data_A_size[next_layer][2:],
                               data_B_size[next_layer][2:])
-        data_B_np = avg_vote(ann_BA_upnnf2, ts2np(data_A[next_layer]), sizes[next_layer], data_B_size[next_layer][2:],
-                             data_A_size[next_layer][2:])
+        '''data_B_np = avg_vote(ann_BA_upnnf2, ts2np(data_A[next_layer]), sizes[next_layer], data_B_size[next_layer][2:],
+                             data_A_size[next_layer][2:])'''
 
         data_AP[next_layer] = np2ts(data_AP_np, device)
-        data_B[next_layer] = np2ts(data_B_np, device)
+        '''data_B[next_layer] = np2ts(data_B_np, device)'''
 
         target_BP_np = avg_vote(ann_AB, ts2np(data_BP[curr_layer]), sizes[curr_layer], data_A_size[curr_layer][2:],
                                 data_B_size[curr_layer][2:])
-        target_A_np = avg_vote(ann_BA, ts2np(data_A[curr_layer]), sizes[curr_layer], data_B_size[curr_layer][2:],
-                               data_A_size[curr_layer][2:])
+        '''target_A_np = avg_vote(ann_BA, ts2np(data_A[curr_layer]), sizes[curr_layer], data_B_size[curr_layer][2:],
+                               data_A_size[curr_layer][2:])'''
 
         target_BP = np2ts(target_BP_np, device)
-        target_A = np2ts(target_A_np, device)
+        '''target_A = np2ts(target_A_np, device)'''
 
         print('- deconvolution for feat A\'')
         start_time_2 = time.time()
@@ -105,11 +105,11 @@ def analogy(img_A, img_BP, config):
                                                               iters=400, display=False)
         print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])        
 
-        print('- deconvolution for feat B')
+        '''print('- deconvolution for feat B')
         start_time_2 = time.time()        
         data_B[curr_layer+1] = model.get_deconvoluted_feat(target_A, curr_layer, data_B[next_layer], lr=lr[curr_layer],
                                                              iters=400, display=False)
-        print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])                
+        print("\tElapse: "+str(datetime.timedelta(seconds=time.time()- start_time_2))[:-7])   '''             
 
         # in case of data type inconsistency
         if data_B[curr_layer + 1].type() == torch.cuda.DoubleTensor:
